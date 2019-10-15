@@ -1,6 +1,6 @@
 module.exports = function solveSudoku(matrix) {
 
-
+  const emptySpaces = emptySpace(matrix);
 
 };
 
@@ -41,4 +41,15 @@ const checkSquare = function(matrix, column, row, value) {
   return true;
 };
 
+const emptySpace = function(matrix){
+  let emptySpaces = [];
+  for(let row = 0; row < matrix.length; row++){
+    for(let col = 0; col < matrix[row].length; col++){
+      if(matrix[row][col] === 0){
+        emptySpaces.push([row, col]);
+      }
+    }
+  }
+  return emptySpaces;
+};
 
