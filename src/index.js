@@ -1,6 +1,7 @@
 module.exports = function solveSudoku(matrix) {
 
   const emptySpaces = emptySpace(matrix);
+  return solvePuzzle(matrix, emptySpaces);
 
 };
 
@@ -53,3 +54,29 @@ const emptySpace = function(matrix){
   return emptySpaces;
 };
 
+const solvePuzzle = function(matrix, emptySpace){
+  let limit = 9;
+  let i, row, col, value, match;
+
+  for(i = 0; i < emptySpace.length;) {
+    row = emptySpace[i][0];
+    col = emptySpace[i][1];
+    value = matrix[row][col] + 1;
+    match = false;
+
+    while(!match && value <= limit){
+      if(checkValue(matrix, col, row, value)){
+        match = true;
+        matrix[row][col] = value;
+        i++;
+      } else {
+        value++;
+      }
+    }
+    if(!match) {
+      matrix[row][col] = 0;
+      i--;
+    }
+  }
+  return matrix;
+};
